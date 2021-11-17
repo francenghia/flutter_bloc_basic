@@ -1,7 +1,7 @@
 name: flutter_bloc_basic
 description: 基于Dloc的Flutter开发框架
 version: 0.0.1
-homepage:
+homepage: https://github.com/moon-motorcycle/flutter_bloc_basic
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -10,6 +10,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  # Bloc 框架 https://bloclibrary.dev/#/
+  bloc: ^7.0.0
+  flutter_bloc: ^7.0.0
+  # HTTP https://pub.dev/packages/dio
+  dio: ^4.0.3
+  # 网络图片加载 https://pub.dev/packages/cached_network_image
+  cached_network_image: ^3.1.0+1
+  # 轮播 https://pub.dev/packages/flutter_swiper
+  flutter_swiper: ^1.1.6
+  # key-value存储 https://pub.dev/packages/shared_preferences
+  shared_preferences: ^2.0.8
+  # Toast https://pub.dev/packages/fluttertoast
+  fluttertoast: ^8.0.8
 
 dev_dependencies:
   flutter_test:
