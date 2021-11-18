@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  equatable: ^2.0.3
   # Bloc 框架 https://bloclibrary.dev/#/
   bloc: ^7.0.0
   flutter_bloc: ^7.0.0
@@ -23,6 +25,12 @@ dependencies:
   shared_preferences: ^2.0.8
   # Toast https://pub.dev/packages/fluttertoast
   fluttertoast: ^8.0.8
+  # 路由管理 https://pub.dev/packages/fluro
+  fluro: ^2.0.3
+  # UI适配 https://pub.dev/packages/flutter_autosize_screen
+  flutter_autosize_screen: ^1.0.1
+  # 列表刷新加载 https://pub.dev/packages/pull_to_refresh
+  pull_to_refresh: ^2.0.0
 
 dev_dependencies:
   flutter_test:
