@@ -1,6 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_autosize_screen/auto_size_util.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_basic/common/theme_bloc/theme_bloc.dart';
 import 'package:flutter_bloc_basic/net/base_repository.dart';
@@ -55,6 +56,7 @@ class _BaseAppState extends State<BaseApp> {
             builder: (BuildContext context, state) => MaterialApp(
               home: widget.home,
               theme: state.themeData,
+              builder: AutoSizeUtil.appBuilder,
               onGenerateRoute: AppRouter.router.generator,
             ),
           ),
