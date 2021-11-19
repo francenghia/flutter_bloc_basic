@@ -10,3 +10,4 @@ export 'global.dart';
 export 'net/base_repository.dart';
 export 'router/router_provider.dart';
 export 'utils/local_storage_util.dart';
+export 'utils/navigator_util.dart';
