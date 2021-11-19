@@ -2,6 +2,7 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter_bloc_basic/router/not_found_page.dart';
 import 'package:flutter_bloc_basic/router/router_provider.dart';
 
+/// 全局命名路由配置类
 class Routes {
   static String webViewPage = '/webViewPage';
 

@@ -8,8 +8,6 @@ import 'package:flutter_bloc_basic/router/app_router.dart';
 import 'package:flutter_bloc_basic/router/router_provider.dart';
 import 'package:flutter_bloc_basic/router/routes.dart';
 
-/// @Author:         wangxing
-
 class BaseApp extends StatefulWidget {
   final Widget home;
 
@@ -22,26 +20,24 @@ class BaseApp extends StatefulWidget {
   /// 全局BlocProvider
   final List<Bloc> globalBlocProviders;
 
-  const BaseApp(
+  BaseApp(
       {Key? key,
       required this.home,
       required this.routerProviders,
       required this.repositoryProviders,
       required this.globalBlocProviders})
-      : super(key: key);
+      : super(key: key) {
+    /// 初始化路由配置
+    final router = FluroRouter();
+    AppRouter.router = router;
+    Routes.configureRoutes(router, routerProviders);
+  }
 
   @override
   _BaseAppState createState() => _BaseAppState();
 }
 
 class _BaseAppState extends State<BaseApp> {
-  _BaseAppState() {
-    /// 初始化路由配置
-    final router = FluroRouter();
-    AppRouter.router = router;
-    Routes.configureRoutes(router, widget.routerProviders);
-  }
-
   @override
   void initState() {
     super.initState();
@@ -53,26 +49,25 @@ class _BaseAppState extends State<BaseApp> {
       providers: _mapRepositoryProviders(),
       child: MultiBlocProvider(
         providers: _mapGlobalBlocProviders(),
-        child: BlocBuilder<ThemeBloc, ThemeState>(
-          bloc: ThemeBloc(),
-          buildWhen: (previous, current) =>
-              // 只有主题模式不一样是才builder
-              previous.themeModel != current.themeModel,
-          builder: (context, state) {
-            return MaterialApp(
+        child: BlocProvider(
+          create: (_) => ThemeBloc(),
+          child: BlocBuilder<ThemeBloc, ThemeState>(
+            builder: (BuildContext context, state) => MaterialApp(
               home: widget.home,
               theme: state.themeData,
               onGenerateRoute: AppRouter.router.generator,
-            );
-          },
+            ),
+          ),
         ),
       ),
     );
   }
 
   _mapRepositoryProviders() => widget.repositoryProviders
-      .map((e) => RepositoryProvider(create: (BuildContext context) => e));
+      .map((e) => RepositoryProvider(create: (BuildContext context) => e))
+      .toList();
 
   _mapGlobalBlocProviders() => widget.globalBlocProviders
-      .map((e) => BlocProvider(create: (BuildContext context) => e));
+      .map((e) => BlocProvider(create: (BuildContext context) => e))
+      .toList();
 }

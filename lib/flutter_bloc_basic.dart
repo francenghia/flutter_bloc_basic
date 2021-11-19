@@ -5,6 +5,7 @@ export 'package:fluro/fluro.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
 
 export 'basic/base_app.dart';
+export 'common/theme_bloc/theme_bloc.dart';
 export 'global.dart';
 export 'net/base_repository.dart';
 export 'router/router_provider.dart';
