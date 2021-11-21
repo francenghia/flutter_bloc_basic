@@ -14,7 +14,7 @@ packages:
       name: bloc
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "7.2.1"
+    version: "8.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -125,20 +125,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_autosize_screen:
-    dependency: "direct main"
-    description:
-      name: flutter_autosize_screen
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.0.1"
   flutter_bloc:
     dependency: "direct main"
     description:
       name: flutter_bloc
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "7.3.3"
+    version: "8.0.0"
   flutter_blurhash:
     dependency: transitive
     description:
@@ -226,6 +219,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.1"
+  logger:
+    dependency: "direct main"
+    description:
+      name: logger
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.0"
   matcher:
     dependency: transitive
     description:
@@ -331,6 +331,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.2"
+  pretty_dio_logger:
+    dependency: "direct main"
+    description:
+      name: pretty_dio_logger
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.2.0-beta-1"
   process:
     dependency: transitive
     description:

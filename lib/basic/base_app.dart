@@ -1,37 +1,56 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_autosize_screen/auto_size_util.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_basic/common/theme_bloc/theme_bloc.dart';
-import 'package:flutter_bloc_basic/net/base_repository.dart';
+import 'package:flutter_bloc_basic/common/typedefs.dart';
+import 'package:flutter_bloc_basic/flutter_bloc_basic.dart';
+import 'package:flutter_bloc_basic/net/base_dio.dart';
 import 'package:flutter_bloc_basic/router/app_router.dart';
 import 'package:flutter_bloc_basic/router/router_provider.dart';
 import 'package:flutter_bloc_basic/router/routes.dart';
+import 'package:flutter_bloc_basic/utils/screen/auto_size.dart';
 
 class BaseApp extends StatefulWidget {
+  /// 程序入口页
   final Widget home;
 
   /// 路由
   final List<RouterProvider> routerProviders;
 
-  /// 数据仓库
-  final List<BaseRepository> repositoryProviders;
-
   /// 全局BlocProvider
-  final List<Bloc> globalBlocProviders;
+  final CreateGlobalBlocProviders createGlobalBlocProviders;
 
-  BaseApp(
-      {Key? key,
-      required this.home,
-      required this.routerProviders,
-      required this.repositoryProviders,
-      required this.globalBlocProviders})
-      : super(key: key) {
+  /// 数据仓库
+  final CreateRepositoryProviders createRepositoryProviders;
+
+  /// response转换器
+  final ConverterResponseFromJsonOnSuccess converterResponseFromJsonOnSuccess;
+
+  final ConverterResponseFromJsonOnFailed converterResponseFromJsonOnFailed;
+
+  final String baseUrl;
+
+  BaseApp({
+    Key? key,
+    required this.home,
+    required this.routerProviders,
+    required this.createGlobalBlocProviders,
+    required this.createRepositoryProviders,
+    required this.baseUrl,
+    required this.converterResponseFromJsonOnSuccess,
+    required this.converterResponseFromJsonOnFailed,
+  }) : super(key: key) {
     /// 初始化路由配置
     final router = FluroRouter();
     AppRouter.router = router;
     Routes.configureRoutes(router, routerProviders);
+
+    /// 初始化HTTP客户端
+    BaseDio.instance.configDio(
+        responseSuccessConvert: converterResponseFromJsonOnSuccess,
+        responseFailedConvert: converterResponseFromJsonOnFailed,
+        baseUrl: baseUrl);
   }
 
   @override
@@ -47,16 +66,17 @@ class _BaseAppState extends State<BaseApp> {
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
-      providers: _mapRepositoryProviders(),
+      providers: widget.createRepositoryProviders.call(),
       child: MultiBlocProvider(
-        providers: _mapGlobalBlocProviders(),
+        providers: widget.createGlobalBlocProviders.call(),
         child: BlocProvider(
           create: (_) => ThemeBloc(),
           child: BlocBuilder<ThemeBloc, ThemeState>(
             builder: (BuildContext context, state) => MaterialApp(
               home: widget.home,
               theme: state.themeData,
-              builder: AutoSizeUtil.appBuilder,
+              debugShowCheckedModeBanner: false,
+              builder: AutoSize.appBuilder,
               onGenerateRoute: AppRouter.router.generator,
             ),
           ),
@@ -64,12 +84,4 @@ class _BaseAppState extends State<BaseApp> {
       ),
     );
   }
-
-  _mapRepositoryProviders() => widget.repositoryProviders
-      .map((e) => RepositoryProvider(create: (BuildContext context) => e))
-      .toList();
-
-  _mapGlobalBlocProviders() => widget.globalBlocProviders
-      .map((e) => BlocProvider(create: (BuildContext context) => e))
-      .toList();
 }
