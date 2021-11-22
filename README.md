@@ -1,39 +1,41 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Flutter Bloc Basic 说明
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+基于 Bloc 框架封装的快速开发架构
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+##### 工程结构
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
-```dart
-const like = 'sample';
+```
+|-- flutter_bloc_basic
+    |-- flutter_bloc_basic.dart           # library 定义
+    |-- global.dart                       # 全局初始化类  三方库初始化调用处
+    |-- basic                             # 基类目录
+    |   |-- base_app.dart                 # MaterialApp基类
+    |   |-- base_repository_state.dart    # 自动注入Repository的StatefulWidget->State基类
+    |   |-- base_state.dart               # 不需要Repository的StatefulWidget->State基类
+    |   |-- repository_bloc.dart          # 需要使用Repository的Bloc需使用此基类
+    |-- common                            # 通用包
+    |   |-- typedefs.dart                 # typedef方法定义
+    |   |-- theme_bloc                    # 主题切换Bloc
+    |       |-- theme_bloc.dart
+    |       |-- theme_event.dart
+    |       |-- theme_state.dart
+    |-- net                               # Http相关
+    |   |-- base_dio.dart                 # Dio默认实例
+    |   |-- base_exceptions.dart          # 自定义异常类,异常处理
+    |   |-- base_repository.dart          # Repository基类,管理Http请求,dispose生命周期内自动取消
+    |   |-- error_interceptor.dart        # DioError转换拦截器
+    |   |-- net.dart                      # net Export类
+    |-- router
+    |   |-- app_router.dart               # 路由管理实例
+    |   |-- not_found_page.dart           # 路由NotFound返回页
+    |   |-- router_provider.dart          # 定义路由回调抽象类
+    |   |-- routes.dart                   # 配置路由
+    |-- utils
+        |-- local_storage_util.dart       # SharedPreferences工具类
+        |-- navigator_util.dart           # 导航工具类
+        |-- screen                        #屏幕自动适配工具类
+            |-- auto_size.dart
+            |-- auto_size_screen_util.dart
+            |-- binding.dart
 ```
 
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
