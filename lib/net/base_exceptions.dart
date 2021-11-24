@@ -9,7 +9,7 @@ class BaseException implements Exception {
 
   @override
   String toString() {
-    return 'BaseException{message: $message, code: $code}';
+    return '$runtimeType : {message: $message, code: $code}';
   }
 
   factory BaseException.create(DioError error) {
@@ -96,4 +96,14 @@ class TcpException extends BaseException {
 /// 服务器异常
 class ServerException extends BaseException {
   ServerException(int? code, String? message) : super(code, message);
+}
+
+/// 业务异常
+class BusinessException extends BaseException {
+  BusinessException(int? code, String? message) : super(code, message);
+}
+
+/// 其他异常 如Json解析错误等
+class OtherException extends BaseException {
+  OtherException(int? code, String? message) : super(code, message);
 }

@@ -1,9 +1,4 @@
-import '../flutter_bloc_basic.dart';
-
-typedef ConverterResponseFromJsonOnSuccess = Function(
-    Map<String, dynamic> json);
-
-typedef ConverterResponseFromJsonOnFailed = Function(BaseException e);
+import 'package:flutter_bloc_basic/flutter_bloc_basic.dart';
 
 typedef CreateGlobalBlocProviders = List<BlocProvider> Function();
 

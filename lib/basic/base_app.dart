@@ -6,6 +6,7 @@ import 'package:flutter_bloc_basic/common/theme_bloc/theme_bloc.dart';
 import 'package:flutter_bloc_basic/common/typedefs.dart';
 import 'package:flutter_bloc_basic/flutter_bloc_basic.dart';
 import 'package:flutter_bloc_basic/net/base_dio.dart';
+import 'package:flutter_bloc_basic/net/base_response_converter.dart';
 import 'package:flutter_bloc_basic/router/app_router.dart';
 import 'package:flutter_bloc_basic/router/router_provider.dart';
 import 'package:flutter_bloc_basic/router/routes.dart';
@@ -24,12 +25,9 @@ class BaseApp extends StatefulWidget {
   /// 数据仓库
   final CreateRepositoryProviders createRepositoryProviders;
 
-  /// response转换器
-  final ConverterResponseFromJsonOnSuccess converterResponseFromJsonOnSuccess;
-
-  final ConverterResponseFromJsonOnFailed converterResponseFromJsonOnFailed;
-
   final String baseUrl;
+
+  final BaseResponseConverter baseResponseConverter;
 
   BaseApp({
     Key? key,
@@ -38,8 +36,7 @@ class BaseApp extends StatefulWidget {
     required this.createGlobalBlocProviders,
     required this.createRepositoryProviders,
     required this.baseUrl,
-    required this.converterResponseFromJsonOnSuccess,
-    required this.converterResponseFromJsonOnFailed,
+    required this.baseResponseConverter,
   }) : super(key: key) {
     /// 初始化路由配置
     final router = FluroRouter();
@@ -48,9 +45,7 @@ class BaseApp extends StatefulWidget {
 
     /// 初始化HTTP客户端
     BaseDio.instance.configDio(
-        responseSuccessConvert: converterResponseFromJsonOnSuccess,
-        responseFailedConvert: converterResponseFromJsonOnFailed,
-        baseUrl: baseUrl);
+        baseUrl: baseUrl, baseResponseConverter: baseResponseConverter);
   }
 
   @override
