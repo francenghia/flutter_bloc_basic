@@ -23,8 +23,10 @@
     |   |-- base_dio.dart                 # Dio默认实例
     |   |-- base_exceptions.dart          # 自定义异常类,异常处理
     |   |-- base_repository.dart          # Repository基类,管理Http请求,dispose生命周期内自动取消
-    |   |-- error_interceptor.dart        # DioError转换拦截器
+    |   |-- base_response.dart            # Response基类
+    |   |-- base_response_converter.dart  # Response基类 数据转换器
     |   |-- net.dart                      # net Export类
+    |   |-- result.dart                   # 返回给调用层数据结构
     |-- router
     |   |-- app_router.dart               # 路由管理实例
     |   |-- not_found_page.dart           # 路由NotFound返回页
@@ -32,6 +34,7 @@
     |   |-- routes.dart                   # 配置路由
     |-- utils
         |-- local_storage_util.dart       # SharedPreferences工具类
+        |-- log_util.dart                 # 打印日志工具类
         |-- navigator_util.dart           # 导航工具类
         |-- screen                        #屏幕自动适配工具类
             |-- auto_size.dart
