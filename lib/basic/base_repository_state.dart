@@ -19,16 +19,11 @@ abstract class BaseRepositoryState<
     return BlocProvider<RB>(
       create: (context) => createRepositoryBloc()
         ..repository = RepositoryProvider.of<R>(context),
-      child: BlocConsumer<RB, S>(
-        builder: blocWidgetBuilder,
-        listener: onStateChangeListener,
-      ),
+      child: blocWidgetBuilder(context),
     );
   }
 
   RB createRepositoryBloc();
 
-  void onStateChangeListener(BuildContext context, S state);
-
-  Widget blocWidgetBuilder(BuildContext context, S state);
+  Widget blocWidgetBuilder(BuildContext context);
 }

@@ -13,16 +13,11 @@ abstract class BaseState<W extends StatefulWidget, E, S, B extends Bloc<E, S>>
   Widget build(BuildContext context) {
     return BlocProvider<B>(
       create: (context) => createBloc(),
-      child: BlocConsumer<B, S>(
-        builder: blocWidgetBuilder,
-        listener: onStateChangeListener,
-      ),
+      child: blocWidgetBuilder(context),
     );
   }
 
   B createBloc();
 
-  void onStateChangeListener(BuildContext context, S state);
-
-  Widget blocWidgetBuilder(BuildContext context, S state);
+  Widget blocWidgetBuilder(BuildContext context);
 }
