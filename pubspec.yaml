@@ -17,8 +17,9 @@ dependencies:
   flutter_bloc: ^7.1.0
   # HTTP https://pub.dev/packages/dio
   dio: ^4.0.3
+  # https://pub.dev/packages/pretty_dio_logger
   pretty_dio_logger: ^1.1.1
-  # Log
+  # https://pub.dev/packages/logger
   logger: ^1.1.0
   # 网络图片加载 https://pub.dev/packages/cached_network_image
   cached_network_image: ^3.1.0+1
@@ -39,6 +40,8 @@ dependencies:
   video_player: ^2.2.7
   # https://pub.dev/packages/chewie
   chewie: ^1.2.2
+  # https://pub.dev/packages/audioplayers
+  audioplayers: ^0.20.1
 
 dev_dependencies:
   flutter_test:
