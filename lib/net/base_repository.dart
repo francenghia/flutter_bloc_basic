@@ -4,12 +4,6 @@ import 'package:flutter_bloc_basic/net/base_dio.dart';
 import 'package:flutter_bloc_basic/net/result.dart';
 
 class BaseRepository {
-  late CancelToken _cancelToken;
-
-  BaseRepository() {
-    _cancelToken = CancelToken();
-  }
-
   Future<Result> requestApi<T>(
     Method method,
     String apiPathUrl, {
@@ -23,7 +17,7 @@ class BaseRepository {
           method.value, apiPathUrl,
           body: body,
           queryParameters: queryParameters,
-          cancelToken: _cancelToken,
+          cancelToken: cancelToken,
           options: options);
       if (baseResponse != null) {
         if (baseResponse.code != 200) {
@@ -39,13 +33,6 @@ class BaseRepository {
       return Error.create(BaseException.create(e));
     } on Exception catch (e) {
       return Error.create(OtherException(-1, e.toString()));
-    }
-  }
-
-  /// 取消HTTP请求
-  void disposeDio() {
-    if (!_cancelToken.isCancelled) {
-      _cancelToken.cancel();
     }
   }
 }

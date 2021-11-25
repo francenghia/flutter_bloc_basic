@@ -5,19 +5,35 @@ import 'package:flutter_bloc_basic/flutter_bloc_basic.dart';
 /// W => StatefulWidget
 /// E => Bloc.Event Bloc事件
 /// S => Bloc.State Bloc状态
-/// R => Repository 数据仓库
-/// RB => RepositoryBloc 含有数据仓库的Bloc
+/// B => Bloc
 abstract class BaseState<W extends StatefulWidget, E, S, B extends Bloc<E, S>>
     extends State<W> {
+  /// 控制顶层BlocConsumer reBuild 默认不随States变化重新构建
+  late bool _reBuild = false;
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<B>(
       create: (context) => createBloc(),
-      child: blocWidgetBuilder(context),
+      child: BlocConsumer<B, S>(
+        buildWhen: (previous, current) => _reBuild,
+        builder: blocWidgetBuilder,
+        listener: onStateChangeListener,
+      ),
     );
   }
 
+  /// 创建Bloc
   B createBloc();
 
-  Widget blocWidgetBuilder(BuildContext context);
+  /// States变化监听
+  void onStateChangeListener(BuildContext context, S state);
+
+  /// 构建组件
+  Widget blocWidgetBuilder(BuildContext context, S state);
+
+  /// 设置顶层BlocConsumer reBuild
+  void pageReBuildWhitStatesChanged(bool reBuild) {
+    _reBuild = reBuild;
+  }
 }

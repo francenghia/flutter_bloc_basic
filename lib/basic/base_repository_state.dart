@@ -13,17 +13,12 @@ abstract class BaseRepositoryState<
     E,
     S,
     R extends BaseRepository,
-    RB extends RepositoryBloc<E, S, R>> extends State<W> {
+    RB extends RepositoryBloc<E, S, R>> extends BaseState<W, E, S, RB> {
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider<RB>(
-      create: (context) => createRepositoryBloc()
-        ..repository = RepositoryProvider.of<R>(context),
-      child: blocWidgetBuilder(context),
-    );
+  RB createBloc() {
+    return createRepositoryBloc()
+      ..repository = RepositoryProvider.of<R>(context);
   }
 
   RB createRepositoryBloc();
-
-  Widget blocWidgetBuilder(BuildContext context);
 }

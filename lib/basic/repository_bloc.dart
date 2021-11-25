@@ -3,7 +3,11 @@ import 'package:flutter_bloc_basic/flutter_bloc_basic.dart';
 class RepositoryBloc<E, S, R extends BaseRepository> extends Bloc<E, S> {
   R? repository;
 
-  RepositoryBloc(initialState) : super(initialState);
+  late CancelToken _cancelToken;
+
+  RepositoryBloc(initialState) : super(initialState) {
+    _cancelToken = CancelToken();
+  }
 
   void injectRepository(R? repository) {
     this.repository = repository;
@@ -11,7 +15,9 @@ class RepositoryBloc<E, S, R extends BaseRepository> extends Bloc<E, S> {
 
   @override
   Future<void> close() {
-    repository?.disposeDio();
+    if (!_cancelToken.isCancelled) {
+      _cancelToken.cancel();
+    }
     return super.close();
   }
 }
