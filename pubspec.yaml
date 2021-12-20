@@ -40,8 +40,10 @@ dependencies:
   video_player: ^2.2.7
   # https://pub.dev/packages/chewie
   chewie: ^1.2.2
-  # https://pub.dev/packages/audioplayers
+  # 音频播放 https://pub.dev/packages/audioplayers
   audioplayers: ^0.20.1
+  # https://pub.dev/packages/webview_flutter
+  webview_flutter: ^3.0.0
 
 dev_dependencies:
   flutter_test:
