@@ -39,7 +39,7 @@ class BaseDio {
         responseHeader: false,
         error: true,
         compact: false,
-        maxWidth: 200));
+        maxWidth: 180));
   }
 
   configDio(
@@ -49,22 +49,30 @@ class BaseDio {
     converter = baseResponseConverter;
   }
 
-  /// 数据返回格式统一
-  Future<BaseResponse<T>?> request<T>(
-    String method,
-    String url, {
+  /// 创建request
+  RequestOptions createRequestOptions(
+    Method method,
+    String path, {
     Object? body,
     Map<String, dynamic>? queryParameters,
     CancelToken? cancelToken,
     Options? options,
-  }) async {
-    final _result = await _dio.request<Map<String, dynamic>>(
-      url,
+  }) {
+    RequestOptions requestOptions =
+        _checkOptions(method.value, options).compose(
+      _dio.options,
+      path,
       data: body,
       queryParameters: queryParameters,
-      options: _checkOptions(method, options),
       cancelToken: cancelToken,
     );
+    requestOptions.cancelToken = cancelToken;
+    return requestOptions;
+  }
+
+  /// 数据返回格式统一
+  Future<BaseResponse<T>?> executeRequest<T>(RequestOptions request) async {
+    final _result = await _dio.fetch<Map<String, dynamic>>(request);
     if (_result.data != null) {
       return BaseResponse(
           code: _result.data!["code"],

@@ -3,7 +3,7 @@ import 'package:flutter_bloc_basic/flutter_bloc_basic.dart';
 import 'package:flutter_bloc_basic/router/app_router.dart';
 import 'package:flutter_bloc_basic/router/routes.dart';
 
-class BaseApp<TB> extends StatefulWidget {
+class BaseApp extends StatefulWidget {
   /// 程序入口页
   final Widget home;
 

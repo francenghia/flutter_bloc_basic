@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc_basic/flutter_bloc_basic.dart';
 import 'package:flutter_bloc_basic/router/app_router.dart';
-
-import '../flutter_bloc_basic.dart';
 
 /// 路由导航工具类
 class NavigatorUtils {

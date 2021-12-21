@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_basic/basic/repository_bloc.dart';
 import 'package:flutter_bloc_basic/flutter_bloc_basic.dart';
 
 /// 需要注入数据仓库的state
@@ -17,7 +16,7 @@ abstract class BaseRepositoryState<
   @override
   RB createBloc() {
     return createRepositoryBloc()
-      ..repository = RepositoryProvider.of<R>(context);
+      ..injectRepository(RepositoryProvider.of<R>(context));
   }
 
   RB createRepositoryBloc();
