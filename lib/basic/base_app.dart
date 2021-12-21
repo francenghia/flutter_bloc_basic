@@ -1,18 +1,9 @@
-import 'package:fluro/fluro.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_basic/common/theme_bloc/theme_bloc.dart';
-import 'package:flutter_bloc_basic/common/typedefs.dart';
 import 'package:flutter_bloc_basic/flutter_bloc_basic.dart';
-import 'package:flutter_bloc_basic/net/base_dio.dart';
-import 'package:flutter_bloc_basic/net/base_response_converter.dart';
 import 'package:flutter_bloc_basic/router/app_router.dart';
-import 'package:flutter_bloc_basic/router/router_provider.dart';
 import 'package:flutter_bloc_basic/router/routes.dart';
-import 'package:flutter_bloc_basic/utils/screen/auto_size.dart';
 
-class BaseApp extends StatefulWidget {
+class BaseApp<TB> extends StatefulWidget {
   /// 程序入口页
   final Widget home;
 
@@ -25,9 +16,15 @@ class BaseApp extends StatefulWidget {
   /// 数据仓库
   final CreateRepositoryProviders createRepositoryProviders;
 
+  /// http url
   final String baseUrl;
 
+  /// response转换器
   final BaseResponseConverter baseResponseConverter;
+
+  /// 默认主题
+  ThemeState defaultThemeState =
+      ThemeState(themeData: ThemeData.light(), themeModel: "light");
 
   BaseApp({
     Key? key,
@@ -37,6 +34,7 @@ class BaseApp extends StatefulWidget {
     required this.createRepositoryProviders,
     required this.baseUrl,
     required this.baseResponseConverter,
+    required this.defaultThemeState,
   }) : super(key: key) {
     /// 初始化路由配置
     final router = FluroRouter();
@@ -65,7 +63,7 @@ class _BaseAppState extends State<BaseApp> {
       child: MultiBlocProvider(
         providers: widget.createGlobalBlocProviders.call(),
         child: BlocProvider(
-          create: (_) => ThemeBloc(),
+          create: (_) => ThemeBloc(defaultTheme: widget.defaultThemeState),
           child: BlocBuilder<ThemeBloc, ThemeState>(
             builder: (BuildContext context, state) => MaterialApp(
               home: widget.home,
