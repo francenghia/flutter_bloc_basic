@@ -42,8 +42,6 @@ dependencies:
   chewie: ^1.2.2
   # 音频播放 https://pub.dev/packages/audioplayers
   audioplayers: ^0.20.1
-  # https://pub.dev/packages/webview_flutter
-  webview_flutter: ^3.0.0
 
 dev_dependencies:
   flutter_test:
