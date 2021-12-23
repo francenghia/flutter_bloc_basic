@@ -1,6 +1,6 @@
 name: flutter_bloc_basic
 description: 基于Dloc的Flutter开发框架
-version: 0.0.5
+version: 0.0.6
 homepage: https://github.com/moon-motorcycle/flutter_bloc_basic
 
 environment:
