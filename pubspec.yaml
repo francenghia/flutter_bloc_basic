@@ -1,6 +1,6 @@
 name: flutter_bloc_basic
 description: 基于Dloc的Flutter开发框架
-version: 0.0.7
+version: 0.0.8
 homepage: https://github.com/moon-motorcycle/flutter_bloc_basic
 
 environment:
@@ -37,11 +37,13 @@ dependencies:
   flutter_smart_dialog: ^3.0.2
   # 视频播放
   # https://pub.dev/packages/video_player
-  video_player: ^2.2.7
-  # https://pub.dev/packages/chewie
-  chewie: ^1.2.2
+  video_player: ^2.2.10
   # 音频播放 https://pub.dev/packages/audioplayers
   audioplayers: ^0.20.1
+  # https://pub.dev/packages/flutter_html
+  flutter_html: ^2.2.0
+  # https://pub.dev/packages/chewie  flutter_html 中包含以下依赖
+  # chewie: ^1.2.2
 
 dev_dependencies:
   flutter_test:
