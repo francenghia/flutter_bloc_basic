@@ -6,15 +6,19 @@ import 'package:flutter_bloc_basic/utils/local_storage_util.dart';
 
 class Global {
   /// 初始化全局信息
-  static Future init(VoidCallback callback) async {
+  static Future init(VoidCallback callback,
+      {SystemUiOverlayStyle? androidStatusBarStyle,
+      VoidCallback? needInitialize}) async {
     WidgetsFlutterBinding.ensureInitialized();
     await LocalStorageUtil.instance();
+    needInitialize?.call();
     callback();
     if (Platform.isAndroid) {
-      /// 以下两行 设置android状态栏为透明的沉浸。写在组件渲染之后，是为了在渲染后进行set赋值，覆盖状态栏，写在渲染之前MaterialApp组件会覆盖掉这个值。
-      SystemUiOverlayStyle systemUiOverlayStyle =
-          const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
-      SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+      androidStatusBarStyle ??= const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.dark);
+      SystemChrome.setSystemUIOverlayStyle(androidStatusBarStyle);
     }
   }
 }
