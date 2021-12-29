@@ -44,6 +44,8 @@ dependencies:
   flutter_html: ^2.2.0
   # https://pub.dev/packages/chewie  flutter_html 中包含以下依赖
   # chewie: ^1.2.2
+  # 屏幕适配 https://pub.dev/packages/flutter_screenutil
+  flutter_screenutil: ^5.0.2
 
 dev_dependencies:
   flutter_test:

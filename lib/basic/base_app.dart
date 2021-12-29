@@ -22,6 +22,15 @@ class BaseApp extends StatefulWidget {
   /// response转换器
   final BaseResponseConverter baseResponseConverter;
 
+  /// 设计稿中设备的尺寸(单位随意,建议dp,但在使用过程中必须保持一致)
+  final Size designSize;
+
+  /// 支持分屏尺寸
+  final bool splitScreenMode;
+
+  /// 是否根据宽度和高度的最小值来适应文本
+  final bool minTextAdapt;
+
   /// 默认主题
   ThemeState defaultThemeState =
       ThemeState(themeData: ThemeData.light(), themeModel: "light");
@@ -35,6 +44,9 @@ class BaseApp extends StatefulWidget {
     required this.baseUrl,
     required this.baseResponseConverter,
     required this.defaultThemeState,
+    this.designSize = ScreenUtil.defaultSize,
+    this.splitScreenMode = true,
+    this.minTextAdapt = false,
   }) : super(key: key) {
     /// 初始化路由配置
     final router = FluroRouter();
@@ -58,19 +70,23 @@ class _BaseAppState extends State<BaseApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiRepositoryProvider(
-      providers: widget.createRepositoryProviders.call(),
-      child: MultiBlocProvider(
-        providers: widget.createGlobalBlocProviders.call(),
-        child: BlocProvider(
-          create: (_) => ThemeBloc(defaultTheme: widget.defaultThemeState),
-          child: BlocBuilder<ThemeBloc, ThemeState>(
-            builder: (BuildContext context, state) => MaterialApp(
-              home: widget.home,
-              theme: state.themeData,
-              debugShowCheckedModeBanner: false,
-              builder: AutoSize.appBuilder,
-              onGenerateRoute: AppRouter.router.generator,
+    return ScreenUtilInit(
+      designSize: widget.designSize,
+      splitScreenMode: widget.splitScreenMode,
+      minTextAdapt: widget.minTextAdapt,
+      builder: () => MultiRepositoryProvider(
+        providers: widget.createRepositoryProviders.call(),
+        child: MultiBlocProvider(
+          providers: widget.createGlobalBlocProviders.call(),
+          child: BlocProvider(
+            create: (_) => ThemeBloc(defaultTheme: widget.defaultThemeState),
+            child: BlocBuilder<ThemeBloc, ThemeState>(
+              builder: (BuildContext context, state) => MaterialApp(
+                home: widget.home,
+                theme: state.themeData,
+                debugShowCheckedModeBanner: false,
+                onGenerateRoute: AppRouter.router.generator,
+              ),
             ),
           ),
         ),

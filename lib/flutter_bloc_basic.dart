@@ -1,10 +1,20 @@
 library flutter_bloc_basic;
 
+export 'package:audioplayers/audioplayers_api.dart';
+export 'package:audioplayers/src/audio_cache.dart';
+export 'package:audioplayers/src/audioplayer.dart';
 export 'package:bloc/bloc.dart';
+export 'package:cached_network_image/cached_network_image.dart';
+export 'package:card_swiper/card_swiper.dart';
 export 'package:dio/dio.dart';
 export 'package:fluro/fluro.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
+export 'package:flutter_screenutil/flutter_screenutil.dart';
+export 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+export 'package:fluttertoast/fluttertoast.dart';
 export 'package:logger/logger.dart';
+export 'package:pull_to_refresh/pull_to_refresh.dart';
+export 'package:video_player/video_player.dart';
 
 export 'basic/base_app.dart';
 export 'basic/base_repository_state.dart';
@@ -19,4 +29,3 @@ export 'router/router_provider.dart';
 export 'utils/local_storage_util.dart';
 export 'utils/log_util.dart';
 export 'utils/navigator_util.dart';
-export 'utils/screen/auto_size_screen_util.dart';
