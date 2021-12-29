@@ -1,6 +1,6 @@
 name: flutter_bloc_basic
 description: flutter bloc basic
-version: 0.1.1
+version: 0.1.2
 homepage: https://github.com/moon-motorcycle/flutter_bloc_basic
 
 environment:
@@ -23,8 +23,8 @@ dependencies:
   logger: ^1.1.0
   # 网络图片加载 https://pub.dev/packages/cached_network_image
   cached_network_image: ^3.1.0+1
-  # 轮播 https://pub.dev/packages/flutter_swiper
-  flutter_swiper: ^1.1.6
+  # 轮播 https://pub.dev/packages/card_swiper
+  card_swiper: ^1.0.4
   # key-value存储 https://pub.dev/packages/shared_preferences
   shared_preferences: ^2.0.8
   # Toast https://pub.dev/packages/fluttertoast
