@@ -9,6 +9,7 @@ export 'package:card_swiper/card_swiper.dart';
 export 'package:dio/dio.dart';
 export 'package:fluro/fluro.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
+export 'package:flutter_html/flutter_html.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 export 'package:fluttertoast/fluttertoast.dart';
