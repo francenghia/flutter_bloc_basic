@@ -7,7 +7,7 @@ var _logger = Logger(
       methodCount: 1,
       errorMethodCount: 8,
       stackTraceBeginIndex: 4,
-      lineLength: 200,
+      lineLength: 170,
       colors: true,
       printEmojis: true,
       printTime: true),
