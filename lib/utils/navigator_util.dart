@@ -3,7 +3,7 @@ import 'package:flutter_bloc_basic/flutter_bloc_basic.dart';
 import 'package:flutter_bloc_basic/router/app_router.dart';
 
 /// 路由导航工具类
-class NavigatorUtils {
+class NavigatorUtil {
   static void push(BuildContext context, String path,
       {bool replace = false, bool clearStack = false}) {
     FocusScope.of(context).unfocus();
