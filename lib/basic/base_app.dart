@@ -81,12 +81,23 @@ class _BaseAppState extends State<BaseApp> {
           child: BlocProvider(
             create: (_) => ThemeBloc(defaultTheme: widget.defaultThemeState),
             child: BlocBuilder<ThemeBloc, ThemeState>(
-              builder: (BuildContext context, state) => MaterialApp(
-                home: widget.home,
-                theme: state.themeData,
-                debugShowCheckedModeBanner: false,
-                onGenerateRoute: AppRouter.router.generator,
-              ),
+              builder: (BuildContext context, state) {
+                return MaterialApp(
+                  home: widget.home,
+                  theme: state.themeData,
+                  debugShowCheckedModeBanner: false,
+                  onGenerateRoute: AppRouter.router.generator,
+                  builder: (context, widget) {
+                    ScreenUtil.setContext(context);
+                    return MediaQuery(
+                      //Setting font does not change with system font size
+                      data:
+                          MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                      child: widget!,
+                    );
+                  },
+                );
+              },
             ),
           ),
         ),
