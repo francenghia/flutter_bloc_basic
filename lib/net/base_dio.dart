@@ -77,6 +77,8 @@ class BaseDio {
       return BaseResponse(
           code: _result.data!["code"],
           message: _result.data!["message"],
+          success: _result.data!["success"],
+          timestamp: _result.data!["timestamp"],
           result: await converter.convertFromJson<T>(_result.data!["result"]));
     } else {
       return null;
